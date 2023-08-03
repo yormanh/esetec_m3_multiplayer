@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using DG.Tweening;
+using Cinemachine;
 
 public class TimelinePlayer : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class TimelinePlayer : MonoBehaviour
     public GameObject controlPanel;
     [SerializeField] GameObject _objeto;
     bool _isStop = false;
-
+    
 
     public void Awake()
     {
@@ -25,10 +26,14 @@ public class TimelinePlayer : MonoBehaviour
     {
         controlPanel.SetActive(true);
         HacerAnimacion();
+     
     }
     void HacerAnimacion()
     {
+        if (_objeto == null) return;
+
         _objeto.transform.DOShakeRotation(3, 90, 4, 20, false);
+
         
     }
 
@@ -44,7 +49,7 @@ public class TimelinePlayer : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(director.time);
+        //Debug.Log(director.time);
         //if (director.time >= 4 && _isStop == false)
         //if (_isStop == false && director.time >= 4)
         if (!_isStop && director.time >= 4)
